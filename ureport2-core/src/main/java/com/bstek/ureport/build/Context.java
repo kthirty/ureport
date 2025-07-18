@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2017 Bstek
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License.  You may obtain a copy
  * of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ApplicationContext;
 
 import com.bstek.ureport.Utils;
 import com.bstek.ureport.chart.ChartData;
@@ -37,6 +36,7 @@ import com.bstek.ureport.model.Column;
 import com.bstek.ureport.model.Report;
 import com.bstek.ureport.model.Row;
 import com.bstek.ureport.utils.ElCompute;
+import org.springframework.context.ApplicationContext;
 
 /**
  * @author Jacky.gao
@@ -80,12 +80,12 @@ public class Context {
 		this.rootCell=new Cell();
 		this.rootCell.setName("ROOT");
 	}
-	
+
 	public Context(ApplicationContext applicationContext,Map<String,Object> parameters){
 		this.applicationContext=applicationContext;
 		this.parameters=parameters;
 	}
-	
+
 	public Map<String,String> getMapping(DatasetExpression expr){
 		if(expr.getMappingType().equals(MappingType.simple)){
 			Map<String,String> mapping=expr.getMapping();
@@ -106,46 +106,46 @@ public class Context {
 		}
 		return null;
 	}
-	
+
 	public void doHideProcessColumn(Column col) {
 		hideRowColumnBuilder.doHideProcessColumn(report, col);
 	}
-	
+
 	public void doHideProcessRow(Row row) {
 		hideRowColumnBuilder.doHideProcessRow(report, row);
 	}
-	
+
 	public void addFillBlankRow(Row row,int value){
 		fillBlankRowsMap.put(row, value);
 	}
-	
+
 	public Map<Row, Integer> getFillBlankRowsMap() {
 		return fillBlankRowsMap;
 	}
-	
+
 	public ReportBuilder getReportBuilder() {
 		return reportBuilder;
 	}
-	
+
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
-	
+
 	public Map<String, Object> getParameters() {
 		return parameters;
 	}
-	
+
 	public boolean isDoPaging() {
 		return doPaging;
 	}
 	public void setDoPaging(boolean doPaging) {
 		this.doPaging = doPaging;
 	}
-	
+
 	public List<BindData> buildCellData(Cell cell){
 		return DataCompute.buildCellData(cell, this);
 	}
-	
+
 	public Cell getBlankCell(Row row,Column column){
 		Map<Column,Cell> colCellMap=blankCellsMap.get(row);
 		if(colCellMap==null){
@@ -154,14 +154,14 @@ public class Context {
 		Cell targetCell=colCellMap.get(column);
 		return targetCell;
 	}
-	
+
 	public void removeBlankCell(Cell blankCell){
 		Row row=blankCell.getRow();
 		Column col=blankCell.getColumn();
 		Map<Column,Cell> colCellMap=blankCellsMap.get(row);
 		colCellMap.remove(col);
 	}
-	
+
 	public void addBlankCell(Cell cell){
 		cell.setBlankCell(true);
 		Row row=cell.getRow();
@@ -174,12 +174,12 @@ public class Context {
 		cellMap.put(column, cell);
 		addReportCell(cell);
 	}
-	
+
 	public void addCell(Cell newCell){
 		addReportCell(newCell);
 		addUnprocessedCell(newCell);
 	}
-	
+
 	public void addUnprocessedCell(Cell cell){
 		String cellName=cell.getName();
 		List<Cell> cells=null;
@@ -191,11 +191,11 @@ public class Context {
 		}
 		cells.add(cell);
 	}
-	
+
 	public Map<Row, Map<Column, Cell>> getBlankCellsMap() {
 		return blankCellsMap;
 	}
-	
+
 	public void addReportCell(Cell newCell){
 		boolean lazyAdd=report.addCell(newCell);
 		if(lazyAdd){
@@ -210,16 +210,16 @@ public class Context {
 	public Map<String, ChartData> getChartDataMap() {
 		return chartDataMap;
 	}
-	
+
 	public Row getRow(int rowNumber){
 		return report.getRow(rowNumber);
 	}
-	
-	
+
+
 	public Column getColumn(int columnNumber){
 		return report.getColumn(columnNumber);
 	}
-	
+
 	public Report getReport() {
 		return report;
 	}
@@ -230,11 +230,11 @@ public class Context {
 		}
 		throw new DatasetUndefinitionException(name);
 	}
-	
+
 	public Map<String, Dataset> getDatasetMap() {
 		return datasetMap;
 	}
-	
+
 	public List<Cell> nextUnprocessedCells(){
 		if(unprocessedCellsMap.size()==0){
 			return null;
@@ -261,27 +261,27 @@ public class Context {
 		}
 		if(targetCellName==null){
 			throw new CellDependencyException();
-		}else{			
+		}else{
 			unprocessedCellsMap.remove(targetCellName);
 		}
 		return targetCellsList;
 	}
-	
+
 	public Object evalExpr(String expression){
 		return new ElCompute().doCompute(expression);
 	}
-	
+
 	public boolean isCellPocessed(String cellName){
 		return !unprocessedCellsMap.containsKey(cellName);
 	}
-	
+
 	public void addRow(Row row){
 		this.report.getRows().add(row);
 	}
 	public void addColumn(Column column){
 		this.report.getColumns().add(column);
 	}
-	
+
 	public int getPageIndex() {
 		return pageIndex;
 	}
@@ -295,15 +295,15 @@ public class Context {
 	public List<Row> getCurrentPageRows(int pageIndex) {
 		return currentPageRowsMap.get(pageIndex);
 	}
-	
+
 	public void addExistPageFunctionCells(Cell cell) {
 		existPageFunctionCells.add(cell);
 	}
-	
+
 	public List<Cell> getExistPageFunctionCells() {
 		return existPageFunctionCells;
 	}
-	
+
 	public int getTotalPages() {
 		return totalPages;
 	}
@@ -311,15 +311,15 @@ public class Context {
 	public void setTotalPages(int totalPages) {
 		this.totalPages = totalPages;
 	}
-	
+
 	public Cell getRootCell() {
 		return rootCell;
 	}
-	
+
 	public void putVariable(String key,Object value){
 		variableMap.put(key, value);
 	}
-	
+
 	public void resetVariableMap(){
 		variableMap.clear();
 	}
