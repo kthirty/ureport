@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bstek.ureport</groupId>
+	<groupId>top.kthirty.ureport</groupId>
 	<artifactId>ureport2-parent</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -23,9 +23,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>https://github.com/youseries/ureport.git</connection>
-		<developerConnection>https://github.com/youseries/ureport.git</developerConnection>
-		<url>https://github.com/youseries/ureport</url>
+		<connection>https://github.com/kthirty/ureport.git</connection>
+		<developerConnection>https://github.com/kthirty/ureport.git</developerConnection>
+		<url>https://github.com/kthirty/ureport</url>
 	</scm>
 	<organization>
 		<name>Bstek</name>
@@ -175,7 +175,7 @@
 	</distributionManagement>
 
 	<name>UReport2 Parent Project</name>
-	<url>https://github.com/youseries/ureport/tree/master/ureport2-parent</url>
+	<url>https://github.com/kthirty/ureport/tree/master/ureport2-parent</url>
 	<issueManagement>
 		<url>${jira.browse.url}/VELOCITY</url>
 	</issueManagement>

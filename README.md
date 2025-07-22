@@ -28,7 +28,7 @@ Firstly, we need to create a standard Maven project \(create a project with Ecli
 </dependency>
 ```
 
-Within the above dependence information, \[version\] indicates the specific version No. of the ureport2-console package. We can search the keyword  “ureport2-c onsole” at [http://search.maven.org/](http://search.maven.org/) to check the specific version No. of the package. The latest source code can be downloaded from [https://github.com/youseries/ureport](https://github.com/youseries/ureport).
+Within the above dependence information, \[version\] indicates the specific version No. of the ureport2-console package. We can search the keyword  “ureport2-c onsole” at [http://search.maven.org/](http://search.maven.org/) to check the specific version No. of the package. The latest source code can be downloaded from [https://github.com/kthirty/ureport](https://github.com/kthirty/ureport).
 
 It shall be noted that only the latest release version can be found at [http://search.maven.org/](http://search.maven.org/). If you need the latest snapshot, you can search at [https://oss.so](https://oss.so) natype.org/. Pursuant to regulations on sonatype, only the official version can be published on [http://search.maven.org/](http://search.maven.org/), i.e. the central repository of mave, and the snapshot version only exists in [https://oss.sonatype.org/](https://oss.sonatype.org/). If we want to apply the latest snapshot at [https://oss.sonatype.org/](https://oss.sonatype.org/), we need to add repository information in pom.xml, to tell Maven to download the package of snapshot version there. The repository information is listed below:
 
