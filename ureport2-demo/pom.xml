@@ -17,6 +17,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <revision>3.0.0-SNAPSHOT</revision>
   </properties>
 
   <dependencies>
@@ -29,13 +30,38 @@
     <dependency>
       <groupId>top.kthirty.ureport</groupId>
       <artifactId>ureport2-console</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>${revision}</version>
     </dependency>
 
     <dependency>
       <groupId>top.kthirty.ureport</groupId>
       <artifactId>ureport2-core</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>${revision}</version>
     </dependency>
+
+
   </dependencies>
+  <profiles>
+    <profile>
+      <id>snapshot</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>central</id>
+          <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+      </distributionManagement>
+      <build>
+        <plugins>
+          <!-- 发布到中央库 -->
+          <plugin>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
